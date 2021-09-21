@@ -49,10 +49,6 @@ view: order_items {
     value_format: "$#,##0"
   }
 
-  measure: total_profit_int {
-    type: number
-    sql: ${total_sale_price} - ${inventory_items.total_actual_cost} ;;
-    value_format: "$#,##0"
-  }
+
 
 }
