@@ -10,21 +10,6 @@ datagroup: ecommerce_default_datagroup {
 
 persist_with: ecommerce_default_datagroup
 
-explore: distribution_centers {}
-
-explore: inventory_items {
-  join: distribution_centers {
-    type: left_outer
-    sql_on: ${inventory_items.distribution_center_id} = ${distribution_centers.distribution_center_id} ;;
-    relationship: many_to_one
-  }
-
-  join: products {
-    type: left_outer
-    sql_on: ${inventory_items.product_id} = ${products.product_id} ;;
-    relationship: many_to_one
-  }
-}
 
 explore: order_items {
   join: inventory_items {
@@ -65,7 +50,3 @@ explore: orders {
     relationship: many_to_one
   }
 }
-
-explore: products {}
-
-explore: users {}
