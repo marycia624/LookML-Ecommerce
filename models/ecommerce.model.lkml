@@ -1,4 +1,4 @@
-connection: "aws-postgres"
+connection: "m_clickhouse"
 
 # include all the views
 include: "/views/**/*.view"

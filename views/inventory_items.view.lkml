@@ -30,10 +30,10 @@ view: inventory_items {
     sql: ${inventory_item_id} ;;
   }
 
-  measure: total_actual_cost {
-    type:  sum_distinct
-    sql: ${actual_cost} ;;
-    sql_distinct_key: ${inventory_item_id};;
-    value_format: "0"
-  }
+  # measure: total_actual_cost {
+  #   type:  sum_distinct
+  #   sql: ${actual_cost} ;;
+  #   sql_distinct_key: ${inventory_item_id};;
+  #   value_format: "0"
+  # }
 }

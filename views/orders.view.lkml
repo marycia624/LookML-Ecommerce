@@ -12,21 +12,21 @@ view: orders {
     type: date
   }
 
-  dimension_group: filter_start_date {
-    type: time
-    timeframes: [raw]
-    sql:coalesce({% date_start date_filter %}, timestamp '2016-01-01') ;;
-  }
+  # dimension_group: filter_start_date {
+  #   type: time
+  #   timeframes: [raw]
+  #   sql:coalesce({% date_start date_filter %}, timestamp '2016-01-01') ;;
+  # }
 
-  dimension_group: filter_end_date {
-    type: time
-    timeframes: [raw]
-    sql: COALESCE({% date_end date_filter %},CURRENT_TIMESTAMP);;
-  }
+  # dimension_group: filter_end_date {
+  #   type: time
+  #   timeframes: [raw]
+  #   sql: COALESCE({% date_end date_filter %},CURRENT_TIMESTAMP);;
+  # }
 
-  dimension: created_at {
+  dimension: created_at_ts {
     type: number
-    sql: ${TABLE}."created_at" ;;
+    sql: TIMESTAMP 'epoch' + ${TABLE}."created_at" * INTERVAL '1 second' ;;
   }
 
   dimension: status {
@@ -43,8 +43,8 @@ view: orders {
   dimension_group: order_date {
     type: time
     timeframes: [date, week, month, year]
-    datatype: date
-    sql: case when to_timestamp(${TABLE}."created_at") BETWEEN ${filter_start_date_raw} AND ${filter_end_date_raw} then to_timestamp(${TABLE}."created_at") else null end ;;
+    datatype: timestamp
+    sql: ${created_at_ts} ;;
   }
 
   measure: count {
